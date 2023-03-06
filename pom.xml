@@ -12,7 +12,7 @@
 
 	<groupId>io.github.aminovmaksim</groupId>
 	<artifactId>chatgptbot</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 
 	<name>ChatGPT Bot</name>
 	<description>Simple Telegram ChatGPT Bot</description>
