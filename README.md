@@ -1,6 +1,6 @@
 # ChatGPT Telegram Bot
 
-### Check it out => [@gpt3modelbot](t.me/gpt3modelbot)
+### Check it out => [@gpt3modelbot](https://t.me/gpt3modelbot)
 
 --- 
 #### You can set up your own instance. The easiest way is using Heroku.
