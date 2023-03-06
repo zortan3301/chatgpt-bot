@@ -1,6 +1,7 @@
 package io.github.aminovmaksim.chatgptbot.controller
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.google.gson.Gson
 import com.pengrad.telegrambot.TelegramBot
 import com.pengrad.telegrambot.model.Update
 import com.pengrad.telegrambot.request.GetWebhookInfo
@@ -29,7 +30,8 @@ class WebhookController(
     val botService: BotService,
     val botProperties: BotProperties,
     val context: ApplicationContext,
-    val objectMapper: ObjectMapper
+    val objectMapper: ObjectMapper,
+    val gson: Gson
 ) {
 
     val logger: Logger = LoggerFactory.getLogger(javaClass)
@@ -57,13 +59,16 @@ class WebhookController(
     }
 
     @PostMapping(path = ["/#{@botProperties.getToken()}"], consumes = [MediaType.APPLICATION_JSON_VALUE])
-    fun handleUpdate(@RequestBody update: Update): ResponseEntity<String?>? {
+    fun handleUpdate(
+        @RequestBody updateRequest: String
+    ): ResponseEntity<String?>? {
         return try {
+            val update = gson.fromJson(updateRequest, Update::class.java)
             botService.handleUpdate(update)
-            ResponseEntity.ok<String?>("ACCEPTED")
+            ResponseEntity.ok("ACCEPTED")
         } catch (e: Exception) {
-            logger.error("Update Listener exception", e)
-            ResponseEntity.internalServerError().build<String?>()
+            logger.error("Update listener exception", e)
+            ResponseEntity.internalServerError().build()
         }
     }
 
@@ -71,7 +76,7 @@ class WebhookController(
     fun getWebhookInfo(): ResponseEntity<String?>? {
         val response = bot.execute(GetWebhookInfo())
         return if (response.isOk) {
-            ResponseEntity.ok<String?>(objectMapper.writeValueAsString(response.webhookInfo()))
-        } else ResponseEntity.internalServerError().build<String?>()
+            ResponseEntity.ok(objectMapper.writeValueAsString(response.webhookInfo()))
+        } else ResponseEntity.internalServerError().build()
     }
 }
