@@ -10,3 +10,6 @@ telegram:
             enabled: false
             host: ""
             maxConnections: 100
+
+openai:
+    token: ${OPEN_AI_TOKEN}
