@@ -62,6 +62,9 @@ class BotService(
             response.choices[0].message.content
         } catch (e: Exception) {
             logger.error("ChatGPTRequestError for userId: $userId", e)
+            if (e.message != null && e.message!!.contains("timeout")) {
+                return "Your request has timed out, please ask something easier"
+            }
             "Developer is dumb and something went wrong. If it is not burden you, send him this message: ${Instant.now().epochSecond}"
         }
     }
