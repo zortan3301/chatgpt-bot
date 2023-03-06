@@ -9,7 +9,6 @@ class BotConfiguration {
 
     @Bean
     fun telegramBot(properties: BotProperties): TelegramBot {
-        println(properties.token)
         return TelegramBot(properties.token)
     }
 }

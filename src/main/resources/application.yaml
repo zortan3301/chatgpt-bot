@@ -1,3 +1,10 @@
 telegram:
     bot:
         token: ${TG_BOT_TOKEN}
+        webhook:
+            enabled: ${TG_BOT_WEBHOOK_ENABLED}
+            host: ${TG_BOT_HOST}
+            maxConnections: ${TG_BOT_MAX_CONNECTIONS}
+
+openai:
+    token: ${OPEN_AI_TOKEN}

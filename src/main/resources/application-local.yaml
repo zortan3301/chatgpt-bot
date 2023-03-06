@@ -1,3 +1,15 @@
+spring:
+    config:
+        activate:
+            on-profile: local
+
 telegram:
     bot:
         token: ${TG_BOT_TOKEN}
+        webhook:
+            enabled: false
+            host: ""
+            maxConnections: 100
+
+openai:
+    token: ${OPEN_AI_TOKEN}
