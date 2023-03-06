@@ -56,15 +56,16 @@ class BotService(
     fun sendChatGPTRequest(message: String, userId: Long): String {
         val request = ChatRequest(ChatMessage(message))
         request.user = userId.toString()
+        request.max_tokens = 50
 
         return try {
             val response = chatGPTClient.sendChat(request)
             response.choices[0].message.content
         } catch (e: Exception) {
-            logger.error("ChatGPTRequestError for userId: $userId", e)
             if (e.message != null && e.message!!.contains("timeout")) {
                 return "Your request has timed out, please ask something easier"
             }
+            logger.error("ChatGPTRequestError for userId: $userId", e)
             "Developer is dumb and something went wrong. If it is not burden you, send him this message: ${Instant.now().epochSecond}"
         }
     }
