@@ -34,6 +34,11 @@ class BotService(
 
         logger.info("Message $messageId received from user $userId")
 
+        if (text == null) {
+            logger.info("Empty message $messageId skipped from user $userId")
+            return
+        }
+
         if ("/start" == text) {
             bot.execute(
                 SendMessage(userId, "Hi! Just text me something...")
