@@ -22,7 +22,7 @@
 		<kotlin.version>1.6.21</kotlin.version>
 
 		<bot-api.version>6.5.0</bot-api.version>
-		<chatgpt-api.version>1.0.0</chatgpt-api.version>
+		<chatgpt-api.version>1.0.1</chatgpt-api.version>
 		<gson.version>2.10.1</gson.version>
 	</properties>
 
